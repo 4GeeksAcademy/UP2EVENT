@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { backendUrl } from '../utils/Config';
+
 
 export const Reset = () => {
   const [searchParams] = useSearchParams();
@@ -14,7 +16,9 @@ export const Reset = () => {
       return;
     }
     try {
-      const res = await fetch('https://bookish-space-pancake-wrx9v5w7wv49c9vxw-3001.app.github.dev/user/reset', {
+
+      const res = await fetch( backendUrl + "user/reset", {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ access_token: token, new_password: newPassword }),
