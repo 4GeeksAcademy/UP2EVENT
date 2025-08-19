@@ -5,7 +5,7 @@ import { Bars3Icon, XMarkIcon, UserIcon } from "@heroicons/react/24/outline";
 import { supabase } from "../../api/supabaseClient.js";
 import { notifyError, notifySuccess } from '../utils/Notifications';
 const navigation = [
-  { name: "Home", to: "/home" },           // o "/"
+  { name: "Home", to: "/" },           // o "/"
   { name: "Eventos", to: "/eventos" }
 ];
 export function Navbar() {
@@ -67,7 +67,6 @@ export function Navbar() {
           <div className="brand-and-nav" style={{ flex: 1 }}>
             <Link to="/" className="navbar-logo" aria-label="Knect - Inicio">
               <img src="src/front/assets/img/Knect-logo.png" alt="Knect logo" />
-              <span>Knect</span>
             </Link>
             <nav className="navbar-nav" aria-label="Navegación principal">
               <ul className="navbar-nav-list">
