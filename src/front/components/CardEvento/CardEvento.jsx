@@ -42,7 +42,7 @@ export const CardEvento = ({ item, isUser }) => {
   };
 
   return (
-    <article className="dest-card mb 1rem">
+    <article className="dest-card mb 1rem" style={{margin: "1rem"}}>
       {
         item.portada ? (
           <div className="img-container">
@@ -57,20 +57,19 @@ export const CardEvento = ({ item, isUser }) => {
 
       <div className="meta">
         <h3 className="title">{item.titulo}</h3>
-        <p className="country">{item.precio}</p>
+       {/* <p className="country">{item.precio}</p>*/}
       </div>
 
       {
         isUser && (
           <div className="container-btns">
             <Link to={`/crear-evento/${item.id}`}>
-              <button className="btn btn-chip ml-[1px]">Actualizar</button>
+              <button className="btn btn-chip ml-[1px]" style={{marginBottom: '1rem',}}>Actualizar</button>
             </Link>
             <button onClick={() => deleteEvent(item)} className="btn btn-chip ">Eliminar</button>
           </div>
         )
       }
-      <br />
     </article>
   );
 }
