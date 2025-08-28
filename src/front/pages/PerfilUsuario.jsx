@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { backendUrl } from "../utils/Config";
+import { useNavigate } from "react-router-dom";
+import { ActualizarUsuario } from "./ActualizarUsuario";
 
 export const PerfilUsuario = () => {
   const [usuario, setUsuario] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();  
 
-  useEffect(() => {
     const cargarDatosUsuario = async () => {
       const tokenUsuario = localStorage.getItem("token");
       const userId = localStorage.getItem("userId");
 
       try {
-        const respuesta = await fetch(backendUrl+`user/${userId}`, {
+        const respuesta = await fetch(backendUrl + `user/${userId}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${tokenUsuario}`,
@@ -36,8 +38,8 @@ export const PerfilUsuario = () => {
         setError("No se pudieron cargar los datos del usuario.");
       }
     };
-
-    cargarDatosUsuario();
+    useEffect(() => {
+      cargarDatosUsuario();
   }, []);
 
   if (error) {
@@ -52,12 +54,12 @@ export const PerfilUsuario = () => {
     <div
       style={{
         minHeight: "100vh",
-        backgroundImage: "url('https://picsum.photos/id/1015/1200/800')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         padding: "2rem",
         color: "#ffffffff",
       }}
+      className="fondo_perfil"
     >
       <h1>Perfil de {usuario.nombre}</h1>
 
@@ -70,16 +72,18 @@ export const PerfilUsuario = () => {
           borderRadius: "12px",
         }}
       >
-          <div style={{ marginTop: "2rem", textAlign: "center" }}>
+        <div style={{ marginTop: "2rem", textAlign: "center" }}>
           <img
-              src={usuario.avatar}
-              alt="Avatar"
-              style={{
-                width: "120px",
-                borderRadius: "50%",
-                border: "2px solid #fff",
-              }}
-            />
+
+            src={usuario.avatar}
+            alt="Avatar"
+            style={{
+              width: "120px",
+              borderRadius: "50%",
+              border: "2px solid #fff",
+            }}
+          />
+
         </div>
         <div style={{ marginBottom: "1rem" }}>
           <strong>Nombre:</strong> {usuario.nombre}
@@ -95,9 +99,15 @@ export const PerfilUsuario = () => {
         </div>
         <div style={{ marginBottom: "1rem" }}>
           <strong>Email:</strong> {usuario.email}
-      </div>
+        </div>
+
+        <div>
+          <button className="btn btn-chip ml-[1px]" style={{marginBottom: '1rem',}} onClick={() => navigate(`/user/actualizar-perfil/${usuario.id}`)}>
+            editar 
+          </button>
+        </div>
     </div>
-  </div>
+    </div>
 
   );
 }
